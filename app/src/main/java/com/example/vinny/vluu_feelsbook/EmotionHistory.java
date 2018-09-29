@@ -5,7 +5,7 @@ import java.util.Collection;
 
 public class EmotionHistory {
 
-    protected ArrayList<Emotion> emotionHistory;
+    public ArrayList<Emotion> emotionHistory;
 
     public EmotionHistory() {
         emotionHistory = new ArrayList<Emotion>();
@@ -30,7 +30,7 @@ public class EmotionHistory {
     public int count(String emotionName) {
         int count = 0;
         for (Emotion emotion : emotionHistory) {
-            if (emotion.emotionName.equals(emotionName)){
+            if (emotion.getEmotionName().equals(emotionName)){
                 count++;
             }
         }

@@ -50,9 +50,23 @@ public class MainActivity extends AppCompatActivity {
         emotionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String s = emotionList.getItemAtPosition(position).toString();
+                Emotion emotion = (Emotion) emotionList.getItemAtPosition(position);
+                Toast.makeText(MainActivity.this, emotion.getEmotionName(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this, EditEmotionActivity.class);
+                startActivity(intent);
 
-                Toast.makeText(MainActivity.this, s, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        emotionList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Emotion emotion = (Emotion) emotionList.getItemAtPosition(position);
+                emotionHistory.removeEmotion(emotion);
+                Toast.makeText(MainActivity.this, "Deleted Emotion", Toast.LENGTH_LONG).show();
+                adapter.notifyDataSetChanged();
+                saveInFile();
+                return true;
             }
         });
 
@@ -126,11 +140,6 @@ public class MainActivity extends AppCompatActivity {
         loadFromFile();
         adapter = new ArrayAdapter<Emotion>(this, android.R.layout.simple_list_item_1 , (ArrayList<Emotion>) emotionHistory.getEmotionHistory());
         emotionList.setAdapter(adapter);
-    }
-
-    public void viewHistory(View view){
-        Intent intent = new Intent(this, DisplayEmotionActivity.class);
-        startActivity(intent);
     }
 
     private void loadFromFile() {

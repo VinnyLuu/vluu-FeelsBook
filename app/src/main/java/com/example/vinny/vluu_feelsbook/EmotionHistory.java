@@ -1,9 +1,10 @@
 package com.example.vinny.vluu_feelsbook;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class EmotionHistory {
+public class EmotionHistory implements Serializable{
 
     public ArrayList<Emotion> emotionHistory;
 
@@ -25,6 +26,14 @@ public class EmotionHistory {
 
     public int size() {
         return emotionHistory.size();
+    }
+
+    public void setAnEmotion(Emotion newEmotion, int index) {
+        emotionHistory.set(index, newEmotion);
+    }
+
+    public int getIndex(Emotion emotion){
+        return emotionHistory.indexOf(emotion);
     }
 
     public int count(String emotionName) {

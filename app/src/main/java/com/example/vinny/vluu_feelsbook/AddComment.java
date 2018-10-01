@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -46,7 +47,13 @@ public class AddComment extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String comment = emotionBody.getText().toString();
-                Emotion newEmotion = new Emotion(emotion, new Date(), comment);
+                Emotion newEmotion = null;
+                try {
+                    newEmotion = new Emotion(emotion, new Date(), comment);
+                } catch (EmotionCommentTooLong emotionCommentTooLong) {
+                    Toast.makeText(AddComment.this, "Emotion comment too long!", Toast.LENGTH_LONG).show();
+                    finish();
+                }
                 Intent addedComment = new Intent();
                 addedComment.putExtra(EXTRA_COMMENT, (Serializable) newEmotion);
                 setResult(RESULT_OK, addedComment);

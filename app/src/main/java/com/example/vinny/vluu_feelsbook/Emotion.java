@@ -20,10 +20,16 @@ public class Emotion implements Serializable{
 
     }
 
-    public Emotion(String emotionName, Date emotionDate, String emotionComment){
+    public Emotion(String emotionName, Date emotionDate, String emotionComment) throws EmotionCommentTooLong {
         this.emotionName = emotionName;
         this.emotionDate = emotionDate;
-        this.emotionComment = emotionComment;
+        if (emotionComment.length() <= MAX_CHARACTERS) {
+            this.emotionComment = emotionComment;
+        }
+        else {
+            throw new EmotionCommentTooLong();
+        }
+
     }
 
     public String getEmotionName() {

@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EmotionHistory emotionHistory = new EmotionHistory();
     private ArrayAdapter<Emotion> adapter;
     private static final int SUBMIT_COMMENT = 0;
-    private Emotion emotionAddedComment;
+    private static final int EDIT_EMOTION = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +54,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Emotion emotion = (Emotion) emotionList.getItemAtPosition(position);
                 Toast.makeText(MainActivity.this, emotion.getEmotionName(), Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(MainActivity.this, EditEmotionActivity.class);
-                startActivity(intent);
+                Intent intent = EditEmotionActivity.newIntent(MainActivity.this, emotion);
+                intent.putExtra("EMOTIONINDEX", emotionHistory.getIndex(emotion));
+                startActivityForResult(intent, EDIT_EMOTION);
 
             }
         });
@@ -91,17 +92,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Check which request we're responding to
+
         if (requestCode == SUBMIT_COMMENT) {
-            // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                // The user picked a contact.
-                // The Intent's data Uri identifies which contact was selected.
-                emotionAddedComment = AddComment.getEmotion(data);
+                Emotion emotionAddedComment = AddComment.getEmotion(data);
                 emotionHistory.addEmotion(emotionAddedComment);
                 adapter.notifyDataSetChanged();
                 saveInFile();
-                // Do something with the contact here (bigger example below)
+
+            }
+        }
+        if (requestCode == EDIT_EMOTION) {
+            if (resultCode == RESULT_OK) {
+                Emotion newEmotion = EditEmotionActivity.getEditedEmotion(data);
+                int emotionIndex = EditEmotionActivity.getIndex(data);
+                emotionHistory.setAnEmotion(newEmotion, emotionIndex);
+                adapter.notifyDataSetChanged();
+                saveInFile();
+                
             }
         }
     }
@@ -136,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void saveInFile() {
+    public void saveInFile() {
         try {
             // FILE OUTPUTSTREAM makes a byte stream
             FileOutputStream fos = openFileOutput(FILENAME, 0);

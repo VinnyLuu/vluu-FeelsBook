@@ -1,10 +1,11 @@
 package com.example.vinny.vluu_feelsbook;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class Emotion {
+public class Emotion implements Serializable{
 
     private String emotionName;
     private String emotionComment;

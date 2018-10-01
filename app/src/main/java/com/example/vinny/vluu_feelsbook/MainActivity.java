@@ -28,12 +28,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
 
     private static final String FILENAME = "file.sav";
     private ListView emotionList;
     private EmotionHistory emotionHistory = new EmotionHistory();
     private ArrayAdapter<Emotion> adapter;
+    private static final int SUBMIT_COMMENT = 0;
+    private Emotion emotionAddedComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,68 +72,38 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        joyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Emotion joy = new Emotion("Joy", new Date());
-                emotionHistory.addEmotion(joy);
+        joyButton.setOnClickListener(this);
+        angerButton.setOnClickListener(this);
+        loveButton.setOnClickListener(this);
+        sadButton.setOnClickListener(this);
+        fearButton.setOnClickListener(this);
+        surpriseButton.setOnClickListener(this);
+
+        joyButton.setOnLongClickListener(this);
+        angerButton.setOnLongClickListener(this);
+        loveButton.setOnLongClickListener(this);
+        sadButton.setOnLongClickListener(this);
+        fearButton.setOnLongClickListener(this);
+        surpriseButton.setOnLongClickListener(this);
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == SUBMIT_COMMENT) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                // The user picked a contact.
+                // The Intent's data Uri identifies which contact was selected.
+                emotionAddedComment = AddComment.getEmotion(data);
+                emotionHistory.addEmotion(emotionAddedComment);
                 adapter.notifyDataSetChanged();
                 saveInFile();
+                // Do something with the contact here (bigger example below)
             }
-        });
-
-        angerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Emotion anger = new Emotion("Anger", new Date());
-                emotionHistory.addEmotion(anger);
-                adapter.notifyDataSetChanged();
-                saveInFile();
-            }
-        });
-
-        loveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Emotion love = new Emotion("Love", new Date());
-                emotionHistory.addEmotion(love);
-                adapter.notifyDataSetChanged();
-                saveInFile();
-            }
-        });
-
-        sadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Emotion sad = new Emotion("Sad", new Date());
-                emotionHistory.addEmotion(sad);
-                adapter.notifyDataSetChanged();
-                saveInFile();
-
-            }
-        });
-
-        fearButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Emotion fear = new Emotion("Fear", new Date());
-                emotionHistory.addEmotion(fear);
-                adapter.notifyDataSetChanged();
-                saveInFile();
-
-            }
-        });
-
-        surpriseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Emotion surprise = new Emotion("Surprise", new Date());
-                emotionHistory.addEmotion(surprise);
-                adapter.notifyDataSetChanged();
-                saveInFile();
-
-            }
-        });
+        }
     }
 
     @Override
@@ -186,4 +158,89 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.addAnger:
+                Emotion anger = new Emotion("Anger", new Date());
+                emotionHistory.addEmotion(anger);
+                adapter.notifyDataSetChanged();
+                saveInFile();
+                break;
+
+            case R.id.addFear:
+                Emotion fear = new Emotion("Fear", new Date());
+                emotionHistory.addEmotion(fear);
+                adapter.notifyDataSetChanged();
+                saveInFile();
+                break;
+
+            case R.id.addJoy:
+                Emotion joy = new Emotion("Joy", new Date());
+                emotionHistory.addEmotion(joy);
+                adapter.notifyDataSetChanged();
+                saveInFile();
+                break;
+
+            case R.id.addLove:
+                Emotion love = new Emotion("Love", new Date());
+                emotionHistory.addEmotion(love);
+                adapter.notifyDataSetChanged();
+                saveInFile();
+                break;
+
+            case R.id.addSad:
+                Emotion sad = new Emotion("Sadness", new Date());
+                emotionHistory.addEmotion(sad);
+                adapter.notifyDataSetChanged();
+                saveInFile();
+                break;
+
+            case R.id.addSurprise:
+                Emotion surprise = new Emotion("Surprise", new Date());
+                emotionHistory.addEmotion(surprise);
+                adapter.notifyDataSetChanged();
+                saveInFile();
+                break;
+        }
+
+
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        String emotionName;
+        switch (v.getId()) {
+            case R.id.addAnger:
+                emotionName = "Anger";
+                break;
+
+            case R.id.addFear:
+                emotionName = "Fear";
+                break;
+
+            case R.id.addJoy:
+                emotionName = "Joy";
+                break;
+
+            case R.id.addLove:
+                emotionName = "Love";
+                break;
+
+            case R.id.addSad:
+                emotionName = "Sadness";
+                break;
+
+            case R.id.addSurprise:
+                emotionName = "Surprise";
+                break;
+
+            default:
+                emotionName = " ";
+                break;
+        }
+        Intent intent = AddComment.newIntent(MainActivity.this, emotionName);
+        startActivityForResult(intent, SUBMIT_COMMENT);
+        return true;
+    }
 }

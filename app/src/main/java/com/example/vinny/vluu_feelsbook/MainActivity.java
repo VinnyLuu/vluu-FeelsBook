@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -31,6 +32,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String FILENAME = "file.sav";
     private ListView emotionList;
+    private TextView joyCountView;
+    private TextView sadCountView;
+    private TextView angerCountView;
+    private TextView surpriseCountView;
+    private TextView loveCountView;
+    private TextView fearCountView;
+    private ArrayList<TextView> countViewList = new ArrayList<>();
     private EmotionHistory emotionHistory = new EmotionHistory();
     private ArrayAdapter<Emotion> adapter;
     private static final int SUBMIT_COMMENT = 0;
@@ -47,6 +55,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button sadButton = findViewById(R.id.addSad);
         Button fearButton = findViewById(R.id.addFear);
         Button surpriseButton = findViewById(R.id.addSurprise);
+        joyCountView = findViewById(R.id.joyCountView);
+        sadCountView = findViewById(R.id.sadCountView);
+        angerCountView = findViewById(R.id.angerCountView);
+        surpriseCountView = findViewById(R.id.surpriseCountView);
+        loveCountView = findViewById(R.id.loveCountView);
+        fearCountView = findViewById(R.id.fearCountView);
+        countViewList.add(joyCountView);
+        countViewList.add(sadCountView);
+        countViewList.add(angerCountView);
+        countViewList.add(surpriseCountView);
+        countViewList.add(loveCountView);
+        countViewList.add(fearCountView);
 
         emotionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -64,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Emotion emotion = (Emotion) emotionList.getItemAtPosition(position);
                 emotionHistory.removeEmotion(emotion);
+                updateCount(countViewList);
                 Toast.makeText(MainActivity.this, "Deleted Emotion", Toast.LENGTH_LONG).show();
                 adapter.notifyDataSetChanged();
                 saveInFile();
@@ -85,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fearButton.setOnLongClickListener(this);
         surpriseButton.setOnLongClickListener(this);
 
-
     }
 
     @Override
@@ -95,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (resultCode == RESULT_OK) {
                 Emotion emotionAddedComment = AddComment.getEmotion(data);
                 emotionHistory.addEmotion(emotionAddedComment);
+                updateCount(countViewList);
                 adapter.notifyDataSetChanged();
                 saveInFile();
 
@@ -118,6 +139,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         loadFromFile();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1 , (ArrayList<Emotion>) emotionHistory.getEmotionHistory());
         emotionList.setAdapter(adapter);
+        updateCount(countViewList);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        updateCount(countViewList);
     }
 
     private void loadFromFile() {
@@ -193,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.addSad:
-                Emotion sad = new Emotion("Sadness", new Date());
+                Emotion sad = new Emotion("Sad", new Date());
                 emotionHistory.addEmotion(sad);
                 adapter.notifyDataSetChanged();
                 saveInFile();
@@ -207,6 +235,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
 
+        updateCount(countViewList);
 
     }
 
@@ -231,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.addSad:
-                emotionName = "Sadness";
+                emotionName = "Sad";
                 break;
 
             case R.id.addSurprise:
@@ -245,5 +274,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = AddComment.newIntent(MainActivity.this, emotionName);
         startActivityForResult(intent, SUBMIT_COMMENT);
         return true;
+    }
+
+    private void updateCount(ArrayList<TextView> countViewList){
+        for(TextView view: countViewList) {
+            if(view == angerCountView){
+                angerCountView.setText(String.valueOf(emotionHistory.count("Anger")));
+            }
+            if(view == joyCountView){
+                joyCountView.setText(String.valueOf(emotionHistory.count("Joy")));
+            }
+            if(view == sadCountView){
+                sadCountView.setText(String.valueOf(emotionHistory.count("Sad")));
+            }
+            if(view == surpriseCountView){
+                surpriseCountView.setText(String.valueOf(emotionHistory.count("Surprise")));
+            }
+            if(view == fearCountView){
+                fearCountView.setText(String.valueOf(emotionHistory.count("Fear")));
+            }
+            if(view == loveCountView){
+                loveCountView.setText(String.valueOf(emotionHistory.count("Love")));
+            }
+        }
     }
 }

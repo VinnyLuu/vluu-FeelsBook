@@ -21,7 +21,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 
 import com.google.gson.Gson;
@@ -126,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Emotion newEmotion = EditEmotionActivity.getEditedEmotion(data);
                 int emotionIndex = EditEmotionActivity.getIndex(data);
                 emotionHistory.setAnEmotion(newEmotion, emotionIndex);
+                Collections.sort((List<Emotion>) emotionHistory.getEmotionHistory(), new EmotionComparator());
                 adapter.notifyDataSetChanged();
                 saveInFile();
                 

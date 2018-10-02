@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.text.ParseException;
 import java.util.Date;
 
 public class EditEmotionActivity extends AppCompatActivity {
@@ -33,7 +36,7 @@ public class EditEmotionActivity extends AppCompatActivity {
         emotionCommentView = findViewById(R.id.commentEditView);
         emotionCommentView.setText(oldEmotion.getEmotionComment());
         emotionDateView = findViewById(R.id.editDateTextView);
-        emotionDateView.setText(oldEmotion.getEmotionDate().toString());
+        emotionDateView.setText(oldEmotion.getEmotionDate());
 
         Button finishEdit = findViewById(R.id.submitButton);
         finishEdit.setOnClickListener(new View.OnClickListener() {
@@ -41,16 +44,20 @@ public class EditEmotionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String newEmotionComment = emotionCommentView.getText().toString();
                 // TODO DATE
-                Date date = new Date();
-                Emotion newEmotion = null;
+                String date = String.valueOf(emotionDateView.getText());
                 try {
-                    newEmotion = new Emotion(oldEmotion.getEmotionName(), date, newEmotionComment);
+                    oldEmotion.setEmotionDate(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    oldEmotion.setEmotionComment(newEmotionComment);
                 } catch (EmotionCommentTooLong emotionCommentTooLong) {
-                    finish();
+                    emotionCommentTooLong.printStackTrace();
                 }
                 Intent editedEmotion = new Intent();
                 editedEmotion.putExtra(EXTRA_OLD_EMOTION_INDEX, extraEmotionIndex);
-                editedEmotion.putExtra(EXTRA_EDITED_EMOTION, newEmotion);
+                editedEmotion.putExtra(EXTRA_EDITED_EMOTION, oldEmotion);
                 setResult(RESULT_OK, editedEmotion);
                 finish();
             }

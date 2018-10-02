@@ -19,10 +19,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
+
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -41,21 +40,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        emotionList = (ListView) findViewById(R.id.emotionList);
-        Button joyButton = (Button) findViewById(R.id.addJoy);
-        Button angerButton = (Button) findViewById(R.id.addAnger);
-        Button loveButton = (Button) findViewById(R.id.addLove);
-        Button sadButton = (Button) findViewById(R.id.addSad);
-        Button fearButton = (Button) findViewById(R.id.addFear);
-        Button surpriseButton = (Button) findViewById(R.id.addSurprise);
+        emotionList = findViewById(R.id.emotionList);
+        Button joyButton = findViewById(R.id.addJoy);
+        Button angerButton = findViewById(R.id.addAnger);
+        Button loveButton = findViewById(R.id.addLove);
+        Button sadButton = findViewById(R.id.addSad);
+        Button fearButton = findViewById(R.id.addFear);
+        Button surpriseButton = findViewById(R.id.addSurprise);
 
         emotionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Emotion emotion = (Emotion) emotionList.getItemAtPosition(position);
                 Toast.makeText(MainActivity.this, emotion.getEmotionName(), Toast.LENGTH_LONG).show();
-                Intent intent = EditEmotionActivity.newIntent(MainActivity.this, emotion);
-                intent.putExtra("EMOTIONINDEX", emotionHistory.getIndex(emotion));
+                Intent intent = EditEmotionActivity.newIntent(MainActivity.this, emotion, emotionHistory.getIndex(emotion));
                 startActivityForResult(intent, EDIT_EMOTION);
 
             }
@@ -118,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart(){
         super.onStart();
         loadFromFile();
-        adapter = new ArrayAdapter<Emotion>(this, android.R.layout.simple_list_item_1 , (ArrayList<Emotion>) emotionHistory.getEmotionHistory());
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1 , (ArrayList<Emotion>) emotionHistory.getEmotionHistory());
         emotionList.setAdapter(adapter);
     }
 
@@ -137,9 +135,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // TODO Auto-generated catch block
             e.printStackTrace();
             emotionHistory = new EmotionHistory();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
 
     }

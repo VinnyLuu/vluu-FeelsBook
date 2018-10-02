@@ -2,7 +2,6 @@ package com.example.vinny.vluu_feelsbook;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -11,18 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.Serializable;
 import java.util.Date;
 
 public class AddComment extends AppCompatActivity {
 
-    private static final String EMOTION_COMMENT = "com.example.vinny.vluu_feelsbook.ADD_COMMENT";
-    private static final String EXTRA_COMMENT = "com.example.vinny.vluu_feelsbook.COMMENT";
+    private static final String OLD_EMOTION_COMMENT = "com.example.vinny.vluu_feelsbook.OLD_COMMENT";
+    private static final String EXTRA_NEW_COMMENT = "com.example.vinny.vluu_feelsbook.COMMENT";
     private EditText emotionBody;
     private TextView emotionName;
-    private String comment;
-    private String emotion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +32,12 @@ public class AddComment extends AppCompatActivity {
 
         getWindow().setLayout(width, height);
 
-        emotionName = (TextView) findViewById(R.id.addedEmotionName);
-        final String emotion = getIntent().getStringExtra(EMOTION_COMMENT);
+        emotionName = findViewById(R.id.addedEmotionName);
+        final String emotion = getIntent().getStringExtra(OLD_EMOTION_COMMENT);
         emotionName.setText(emotion);
 
-        emotionBody = (EditText) findViewById(R.id.addCommentView);
-        Button commitComment = (Button) findViewById(R.id.finishComment);
+        emotionBody = findViewById(R.id.addCommentView);
+        Button commitComment = findViewById(R.id.finishComment);
         commitComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +50,7 @@ public class AddComment extends AppCompatActivity {
                     finish();
                 }
                 Intent addedComment = new Intent();
-                addedComment.putExtra(EXTRA_COMMENT, (Serializable) newEmotion);
+                addedComment.putExtra(EXTRA_NEW_COMMENT, newEmotion);
                 setResult(RESULT_OK, addedComment);
                 finish();
             }
@@ -64,12 +59,12 @@ public class AddComment extends AppCompatActivity {
     }
 
     public static Emotion getEmotion(Intent result) {
-        return (Emotion) result.getSerializableExtra(EXTRA_COMMENT);
+        return (Emotion) result.getSerializableExtra(EXTRA_NEW_COMMENT);
     }
 
     public static Intent newIntent(Context packageContext, String emotionName) {
         Intent i = new Intent(packageContext, AddComment.class);
-        i.putExtra(EMOTION_COMMENT, emotionName);
+        i.putExtra(OLD_EMOTION_COMMENT, emotionName);
         return i;
     }
 }

@@ -28,12 +28,13 @@ import java.util.List;
 
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
 
-    private static final String FILENAME = "file.sav";
+    private static final String FILENAME = "filetest.sav";
     private ListView emotionList;
     private TextView joyCountView;
     private TextView sadCountView;
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Emotion emotion = (Emotion) emotionList.getItemAtPosition(position);
-                Toast.makeText(MainActivity.this, emotion.getEmotionName(), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Edit Emotion", Toast.LENGTH_LONG).show();
                 Intent intent = EditEmotionActivity.newIntent(MainActivity.this, emotion, emotionHistory.getIndex(emotion));
                 startActivityForResult(intent, EDIT_EMOTION);
 
@@ -157,16 +158,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             FileInputStream fis = openFileInput(FILENAME);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader reader = new BufferedReader(isr);
-            Gson gson = new Gson();
-            // Line below tries to make an instance of the tweet class. make the tweet class not abstract so that it can actually make an instance
+            GsonBuilder builder = new GsonBuilder();
+            builder.registerTypeAdapter(Emotion.class, new EmotionJsonAdapter());
+            Gson gson = builder.create();
             Type emotionHistoryType = new TypeToken<EmotionHistory>(){}.getType();
             emotionHistory = gson.fromJson(reader, emotionHistoryType);
-            // This reads everything from the Json and puts it into the arraylist of tweets
 
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
-            emotionHistory = new EmotionHistory();
         }
 
     }
@@ -179,16 +178,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             OutputStreamWriter osw = new OutputStreamWriter(fos);
             // Buffer stream
             BufferedWriter writer = new BufferedWriter(osw);
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().registerTypeHierarchyAdapter(Emotion.class, new EmotionJsonAdapter()).create();
             gson.toJson(emotionHistory, writer);
             writer.flush();
             fos.close();
 
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -197,42 +194,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.addAnger:
-                Emotion anger = new Emotion("Anger", new Date());
+                Anger anger = new Anger(new Date());
                 emotionHistory.addEmotion(anger);
                 adapter.notifyDataSetChanged();
                 saveInFile();
                 break;
 
             case R.id.addFear:
-                Emotion fear = new Emotion("Fear", new Date());
+                Fear fear = new Fear(new Date());
                 emotionHistory.addEmotion(fear);
                 adapter.notifyDataSetChanged();
                 saveInFile();
                 break;
 
             case R.id.addJoy:
-                Emotion joy = new Emotion("Joy", new Date());
+                Joy joy = new Joy(new Date());
                 emotionHistory.addEmotion(joy);
                 adapter.notifyDataSetChanged();
                 saveInFile();
                 break;
 
             case R.id.addLove:
-                Emotion love = new Emotion("Love", new Date());
+                Love love = new Love(new Date());
                 emotionHistory.addEmotion(love);
                 adapter.notifyDataSetChanged();
                 saveInFile();
                 break;
 
             case R.id.addSad:
-                Emotion sad = new Emotion("Sad", new Date());
+                Sadness sad = new Sadness(new Date());
                 emotionHistory.addEmotion(sad);
                 adapter.notifyDataSetChanged();
                 saveInFile();
                 break;
 
             case R.id.addSurprise:
-                Emotion surprise = new Emotion("Surprise", new Date());
+                Surprise surprise = new Surprise(new Date());
                 emotionHistory.addEmotion(surprise);
                 adapter.notifyDataSetChanged();
                 saveInFile();
@@ -245,37 +242,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onLongClick(View v) {
-        String emotionName;
+        Emotion emotion = null;
         switch (v.getId()) {
             case R.id.addAnger:
-                emotionName = "Anger";
+                emotion = new Anger(new Date());
                 break;
 
             case R.id.addFear:
-                emotionName = "Fear";
+                emotion = new Fear(new Date());
                 break;
 
             case R.id.addJoy:
-                emotionName = "Joy";
+                emotion = new Joy(new Date());
                 break;
 
             case R.id.addLove:
-                emotionName = "Love";
+                emotion = new Love(new Date());
                 break;
 
             case R.id.addSad:
-                emotionName = "Sad";
+                emotion = new Sadness(new Date());
                 break;
 
             case R.id.addSurprise:
-                emotionName = "Surprise";
+                emotion = new Surprise(new Date());
                 break;
 
             default:
-                emotionName = " ";
+                emotion = null;
                 break;
         }
-        Intent intent = AddComment.newIntent(MainActivity.this, emotionName);
+        Intent intent = AddComment.newIntent(MainActivity.this, emotion);
         startActivityForResult(intent, SUBMIT_COMMENT);
         return true;
     }
@@ -283,22 +280,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void updateCount(ArrayList<TextView> countViewList){
         for(TextView view: countViewList) {
             if(view == angerCountView){
-                angerCountView.setText(String.valueOf(emotionHistory.count("Anger")));
+                angerCountView.setText(String.valueOf(emotionHistory.count(new Anger(new Date()))));
             }
             if(view == joyCountView){
-                joyCountView.setText(String.valueOf(emotionHistory.count("Joy")));
+                joyCountView.setText(String.valueOf(emotionHistory.count(new Joy(new Date()))));
             }
             if(view == sadCountView){
-                sadCountView.setText(String.valueOf(emotionHistory.count("Sad")));
+                sadCountView.setText(String.valueOf(emotionHistory.count(new Sadness(new Date()))));
             }
             if(view == surpriseCountView){
-                surpriseCountView.setText(String.valueOf(emotionHistory.count("Surprise")));
+                surpriseCountView.setText(String.valueOf(emotionHistory.count(new Surprise(new Date()))));
             }
             if(view == fearCountView){
-                fearCountView.setText(String.valueOf(emotionHistory.count("Fear")));
+                fearCountView.setText(String.valueOf(emotionHistory.count(new Fear(new Date()))));
             }
             if(view == loveCountView){
-                loveCountView.setText(String.valueOf(emotionHistory.count("Love")));
+                loveCountView.setText(String.valueOf(emotionHistory.count(new Love(new Date()))));
             }
         }
     }

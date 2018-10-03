@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class EmotionHistory implements Serializable{
+    // EmotionHistory is a class that is an Arraylist that holds Emotions.
 
     public ArrayList<Emotion> emotionHistory;
 
@@ -36,10 +37,10 @@ public class EmotionHistory implements Serializable{
         return emotionHistory.indexOf(emotion);
     }
 
-    public int count(String emotionName) {
+    public int count(Emotion emotion) {
         int count = 0;
-        for (Emotion emotion : emotionHistory) {
-            if (emotion.getEmotionName().equals(emotionName)){
+        for (Emotion anEmotion : emotionHistory) {
+            if (anEmotion.getClass().equals(emotion.getClass())){
                 count++;
             }
         }

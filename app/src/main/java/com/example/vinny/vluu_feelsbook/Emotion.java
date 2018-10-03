@@ -6,30 +6,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class Emotion implements Serializable{
+abstract public class Emotion implements Serializable{
 
-    private String emotionName;
-    private String emotionComment;
-    private Date emotionDate;
+    protected String emotionName;
+    protected String emotionComment;
+    protected Date emotionDate;
     private static final Integer MAX_CHARACTERS = 100;
-
-    public Emotion(String emotionName, Date emotionDate){
-        this.emotionName = emotionName;
-        this.emotionDate = emotionDate;
-        this.emotionComment = "";
-    }
-
-    public Emotion(String emotionName, Date emotionDate, String emotionComment) throws EmotionCommentTooLong {
-        this.emotionName = emotionName;
-        this.emotionDate = emotionDate;
-        if (emotionComment.length() <= MAX_CHARACTERS) {
-            this.emotionComment = emotionComment;
-        }
-        else {
-            throw new EmotionCommentTooLong();
-        }
-
-    }
 
     public String getEmotionName() {
         return emotionName;

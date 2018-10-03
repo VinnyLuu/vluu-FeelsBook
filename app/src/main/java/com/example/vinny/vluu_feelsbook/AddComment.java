@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.Date;
 
 public class AddComment extends AppCompatActivity {
+    // Controller that will display a popup window.
 
     private static final String OLD_EMOTION_COMMENT = "com.example.vinny.vluu_feelsbook.OLD_COMMENT";
     private static final String EXTRA_NEW_COMMENT = "com.example.vinny.vluu_feelsbook.COMMENT";
@@ -33,8 +34,8 @@ public class AddComment extends AppCompatActivity {
         getWindow().setLayout(width, height);
 
         emotionName = findViewById(R.id.addedEmotionName);
-        final String emotion = getIntent().getStringExtra(OLD_EMOTION_COMMENT);
-        emotionName.setText(emotion);
+        final Emotion emotion = (Emotion) getIntent().getSerializableExtra(OLD_EMOTION_COMMENT);
+        emotionName.setText(emotion.getEmotionName());
 
         emotionBody = findViewById(R.id.addCommentView);
         Button commitComment = findViewById(R.id.finishComment);
@@ -42,15 +43,13 @@ public class AddComment extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String comment = emotionBody.getText().toString();
-                Emotion newEmotion = null;
                 try {
-                    newEmotion = new Emotion(emotion, new Date(), comment);
+                    emotion.setEmotionComment(comment);
                 } catch (EmotionCommentTooLong emotionCommentTooLong) {
-                    Toast.makeText(AddComment.this, "Emotion comment too long!", Toast.LENGTH_LONG).show();
-                    finish();
+                    emotionCommentTooLong.printStackTrace();
                 }
                 Intent addedComment = new Intent();
-                addedComment.putExtra(EXTRA_NEW_COMMENT, newEmotion);
+                addedComment.putExtra(EXTRA_NEW_COMMENT, emotion);
                 setResult(RESULT_OK, addedComment);
                 finish();
             }
@@ -62,9 +61,9 @@ public class AddComment extends AppCompatActivity {
         return (Emotion) result.getSerializableExtra(EXTRA_NEW_COMMENT);
     }
 
-    public static Intent newIntent(Context packageContext, String emotionName) {
+    public static Intent newIntent(Context packageContext, Emotion emotion) {
         Intent i = new Intent(packageContext, AddComment.class);
-        i.putExtra(OLD_EMOTION_COMMENT, emotionName);
+        i.putExtra(OLD_EMOTION_COMMENT, emotion);
         return i;
     }
 }

@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Emotion emotionAddedComment = AddComment.getEmotion(data);
                 emotionHistory.addEmotion(emotionAddedComment);
                 updateCount(countViewList);
+                Collections.sort((List<Emotion>) emotionHistory.getEmotionHistory(), new EmotionComparator());
                 adapter.notifyDataSetChanged();
                 saveInFile();
 
@@ -151,6 +152,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume(){
         super.onResume();
         updateCount(countViewList);
+        Collections.sort((List<Emotion>) emotionHistory.getEmotionHistory(), new EmotionComparator());
+        adapter.notifyDataSetChanged();
+        saveInFile();
     }
 
     private void loadFromFile() {
@@ -237,6 +241,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         updateCount(countViewList);
+        Collections.sort((List<Emotion>) emotionHistory.getEmotionHistory(), new EmotionComparator());
+        adapter.notifyDataSetChanged();
+        saveInFile();
 
     }
 

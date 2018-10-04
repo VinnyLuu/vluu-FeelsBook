@@ -42,6 +42,12 @@ abstract public class Emotion implements Serializable{
 
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.CANADA);
-        return this.emotionName + " " + dateFormat.format(this.emotionDate);
+        if (this.emotionComment == null){
+            emotionComment = "";
+        }
+        if (emotionComment.length() >= 25){
+            return this.emotionName + " " + dateFormat.format(this.emotionDate);
+        }
+        return this.emotionName + " " + dateFormat.format(this.emotionDate) + " " + this.emotionComment;
     }
 }

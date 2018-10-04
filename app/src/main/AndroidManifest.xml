@@ -17,9 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".EditEmotionActivity" />
-        <activity android:name=".AddComment"
-            android:theme="@style/AppTheme.Popup"
-            ></activity>
+        <activity
+            android:name=".AddCommentActivity"
+            android:theme="@style/AppTheme.Popup" />
+        <activity android:name=".EmotionHistoryActivity" />
+        <activity android:name=".EmotionCountActivity"></activity>
     </application>
 
 </manifest>

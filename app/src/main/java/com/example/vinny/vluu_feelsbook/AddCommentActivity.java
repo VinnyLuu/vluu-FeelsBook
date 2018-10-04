@@ -10,9 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.Date;
 
-public class AddComment extends AppCompatActivity {
+public class AddCommentActivity extends AppCompatActivity {
     // Controller that will display a popup window.
 
     private static final String OLD_EMOTION_COMMENT = "com.example.vinny.vluu_feelsbook.OLD_COMMENT";
@@ -47,6 +46,8 @@ public class AddComment extends AppCompatActivity {
                     emotion.setEmotionComment(comment);
                 } catch (EmotionCommentTooLong emotionCommentTooLong) {
                     emotionCommentTooLong.printStackTrace();
+                    Toast.makeText(AddCommentActivity.this, "Comment Too Long! Retry.", Toast.LENGTH_LONG).show();
+                    finish();
                 }
                 Intent addedComment = new Intent();
                 addedComment.putExtra(EXTRA_NEW_COMMENT, emotion);
@@ -62,7 +63,7 @@ public class AddComment extends AppCompatActivity {
     }
 
     public static Intent newIntent(Context packageContext, Emotion emotion) {
-        Intent i = new Intent(packageContext, AddComment.class);
+        Intent i = new Intent(packageContext, AddCommentActivity.class);
         i.putExtra(OLD_EMOTION_COMMENT, emotion);
         return i;
     }

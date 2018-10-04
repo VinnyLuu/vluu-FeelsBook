@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddComment">
+    tools:context=".AddCommentActivity">
 
     <TextView
         android:id="@+id/addedEmotionName"
@@ -33,8 +33,10 @@
         android:id="@+id/finishComment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:text="Done"
-        app:layout_constraintTop_toBottomOf="@+id/addCommentView"
-        tools:layout_editor_absoluteX="237dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addCommentView" />
 </android.support.constraint.ConstraintLayout>

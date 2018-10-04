@@ -4,14 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.ParseException;
-import java.util.Date;
 
 public class EditEmotionActivity extends AppCompatActivity {
 
@@ -26,7 +25,7 @@ public class EditEmotionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit_emotion);
+        setContentView(R.layout.activity_edit_emotion);
 
         final Emotion oldEmotion = (Emotion) getIntent().getSerializableExtra(EDITING_EMOTION);
         final Integer extraEmotionIndex = getIntent().getIntExtra(EXTRA_OLD_EMOTION_INDEX, 0);
@@ -43,16 +42,17 @@ public class EditEmotionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String newEmotionComment = emotionCommentView.getText().toString();
-                // TODO DATE
                 String date = String.valueOf(emotionDateView.getText());
                 try {
                     oldEmotion.setEmotionDate(date);
                 } catch (ParseException e) {
+                    Toast.makeText(EditEmotionActivity.this, "Incorrect Date Format! Retry!", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
                 try {
                     oldEmotion.setEmotionComment(newEmotionComment);
                 } catch (EmotionCommentTooLong emotionCommentTooLong) {
+                    Toast.makeText(EditEmotionActivity.this, "Comment Too Long! Retry!", Toast.LENGTH_LONG).show();
                     emotionCommentTooLong.printStackTrace();
                 }
                 Intent editedEmotion = new Intent();

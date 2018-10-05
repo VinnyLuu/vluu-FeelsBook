@@ -90,7 +90,7 @@ public class EditEmotionActivity extends AppCompatActivity {
     }
 
     /* Method called to create a new intent to EditEmotionActivity */
-    public static Intent newIntent(Context packageContext, Emotion emotion, int index) {
+    public static Intent newEditEmotionIntent(Context packageContext, Emotion emotion, int index) {
         Intent i = new Intent(packageContext, EditEmotionActivity.class);
         i.putExtra(EDITING_EMOTION, emotion);
         i.putExtra(EXTRA_OLD_EMOTION_INDEX, index);

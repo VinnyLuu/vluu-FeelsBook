@@ -44,7 +44,7 @@ public class EmotionHistoryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Emotion emotion = (Emotion) emotionList.getItemAtPosition(position);
                 Toast.makeText(EmotionHistoryActivity.this, "Edit Emotion", Toast.LENGTH_LONG).show();
-                Intent intent = EditEmotionActivity.newIntent(EmotionHistoryActivity.this, emotion, emotionHistory.getIndex(emotion));
+                Intent intent = EditEmotionActivity.newEditEmotionIntent(EmotionHistoryActivity.this, emotion, emotionHistory.getIndex(emotion));
                 startActivityForResult(intent, EDIT_EMOTION);
 
             }

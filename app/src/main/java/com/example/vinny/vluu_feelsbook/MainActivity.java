@@ -94,8 +94,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * action when any one of the buttons is clicked.
      */
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.historyButton:
                 emotionHistory.saveInFile(FILENAME, MainActivity.this, emotionHistory);
                 Intent historyIntent = new Intent(this, EmotionHistoryActivity.class);
@@ -154,9 +154,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * to the emotion.
      */
     @Override
-    public boolean onLongClick(View view) {
+    public boolean onLongClick(View v) {
         Emotion emotion;
-        switch (view.getId()) {
+        switch (v.getId()) {
             case R.id.addAnger:
                 emotion = new Anger(new Date());
                 break;
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 emotion = null;
                 break;
         }
-        Intent intent = AddCommentActivity.newIntent(MainActivity.this, emotion);
+        Intent intent = AddCommentActivity.newAddCommentIntent(MainActivity.this, emotion);
         Toast.makeText(MainActivity.this, "Add Comment", Toast.LENGTH_LONG).show();
         startActivityForResult(intent, SUBMIT_COMMENT);
         return true;

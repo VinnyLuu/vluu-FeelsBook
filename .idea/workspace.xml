@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6974268d-d775-4dde-b0e9-7b7b7dc3e887" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/AddCommentActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/AddCommentActivity.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EditEmotionActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EditEmotionActivity.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionHistoryActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionHistoryActivity.java" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/MainActivity.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,28 +48,38 @@
       <file leaf-file-name="EmotionHistoryActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionHistoryActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="77" column="22" lean-forward="true" selection-start-line="77" selection-start-column="22" selection-end-line="77" selection-end-column="22" />
+            <state relative-caret-position="30">
+              <caret line="46" column="66" lean-forward="false" selection-start-line="46" selection-start-column="66" selection-end-line="46" selection-end-column="66" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EmotionJsonAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionJsonAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Joy.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/Joy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2145">
-              <caret line="152" column="49" lean-forward="true" selection-start-line="152" selection-start-column="49" selection-end-line="152" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Anger.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/Anger.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+            <state relative-caret-position="685">
+              <caret line="191" column="5" lean-forward="true" selection-start-line="191" selection-start-column="5" selection-end-line="191" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -92,17 +105,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Emotion.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/Emotion.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="735">
-              <caret line="57" column="28" lean-forward="false" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmotionCountActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="EmotionCountActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionCountActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="510">
@@ -115,8 +118,8 @@
       <file leaf-file-name="EditEmotionActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EditEmotionActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-360">
-              <caret line="26" column="7" lean-forward="false" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+            <state relative-caret-position="660">
+              <caret line="97" column="5" lean-forward="true" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -125,8 +128,8 @@
       <file leaf-file-name="AddCommentActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/AddCommentActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="52" column="9" lean-forward="false" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
+            <state relative-caret-position="897">
+              <caret line="80" column="36" lean-forward="true" selection-start-line="80" selection-start-column="36" selection-end-line="80" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -2154,14 +2157,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/AddCommentActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/Anger.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EditEmotionActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/Emotion.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionCommentTooLong.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionComparator.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionCountActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionHistoryActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionJsonAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/Fear.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/Joy.java" />
@@ -2169,7 +2168,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/Sadness.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/Surprise.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionHistory.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/AddCommentActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionHistoryActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EditEmotionActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionCountActivity.java" />
       </list>
     </option>
   </component>
@@ -2432,14 +2435,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/Joy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/Love.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -2460,14 +2455,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="64" lean-forward="false" selection-start-line="10" selection-start-column="64" selection-end-line="10" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionJsonAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2512,14 +2499,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionHistoryActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="77" column="22" lean-forward="true" selection-start-line="77" selection-start-column="22" selection-end-line="77" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionHistory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-690">
@@ -2541,34 +2520,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionCountActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="40" column="73" lean-forward="false" selection-start-line="40" selection-start-column="73" selection-end-line="40" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EditEmotionActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-360">
-          <caret line="26" column="7" lean-forward="false" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+        <state relative-caret-position="660">
+          <caret line="97" column="5" lean-forward="true" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/AddCommentActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionHistoryActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="52" column="9" lean-forward="false" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
+        <state relative-caret-position="30">
+          <caret line="46" column="66" lean-forward="false" selection-start-line="46" selection-start-column="66" selection-end-line="46" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionJsonAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/Joy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2145">
-          <caret line="152" column="49" lean-forward="true" selection-start-line="152" selection-start-column="49" selection-end-line="152" selection-end-column="49" />
+        <state relative-caret-position="685">
+          <caret line="191" column="5" lean-forward="true" selection-start-line="191" selection-start-column="5" selection-end-line="191" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/AddCommentActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="897">
+          <caret line="80" column="36" lean-forward="true" selection-start-line="80" selection-start-column="36" selection-end-line="80" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vinny/vluu_feelsbook/EmotionCountActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="40" column="73" lean-forward="false" selection-start-line="40" selection-start-column="73" selection-end-line="40" selection-end-column="73" />
           <folding />
         </state>
       </provider>

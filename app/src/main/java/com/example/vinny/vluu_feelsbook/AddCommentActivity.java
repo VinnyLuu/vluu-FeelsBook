@@ -78,7 +78,7 @@ public class AddCommentActivity extends AppCompatActivity {
     }
 
     /* Method called to create a new intent to AddCommentActivity */
-    public static Intent newIntent(Context packageContext, Emotion emotion) {
+    public static Intent newAddCommentIntent(Context packageContext, Emotion emotion) {
         Intent i = new Intent(packageContext, AddCommentActivity.class);
         i.putExtra(OLD_EMOTION_COMMENT, emotion);
         return i;

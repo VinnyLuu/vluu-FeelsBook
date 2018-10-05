@@ -94,8 +94,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * action when any one of the buttons is clicked.
      */
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.historyButton:
                 emotionHistory.saveInFile(FILENAME, MainActivity.this, emotionHistory);
                 Intent historyIntent = new Intent(this, EmotionHistoryActivity.class);
@@ -154,9 +154,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * to the emotion.
      */
     @Override
-    public boolean onLongClick(View v) {
+    public boolean onLongClick(View view) {
         Emotion emotion;
-        switch (v.getId()) {
+        switch (view.getId()) {
             case R.id.addAnger:
                 emotion = new Anger(new Date());
                 break;

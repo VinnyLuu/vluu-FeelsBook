@@ -22,14 +22,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * emotion, the user will hold onto the button and will then be taking to AddCommentActivity.
      */
 
-    private static final String FILENAME = "filetest.sav";
     private EmotionHistory emotionHistory;
     private static final int SUBMIT_COMMENT = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        emotionHistory = new EmotionHistory().loadFromFile(FILENAME, this);
+        emotionHistory = new EmotionHistory().loadFromFile(this);
         setContentView(R.layout.activity_main);
 
         /* Setting up the buttons used to add the emotions and navigate to different activities */
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 emotionHistory.addEmotion(emotionAddedComment);
                 Toast.makeText(MainActivity.this, emotionAddedComment.getEmotionName() + " Added!", Toast.LENGTH_LONG).show();
                 Collections.sort((List<Emotion>) emotionHistory.getEmotionHistory(), new EmotionComparator());
-                emotionHistory.saveInFile(FILENAME, this, emotionHistory);
+                emotionHistory.saveInFile(this, emotionHistory);
 
             }
         }
@@ -81,13 +80,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
-        emotionHistory = emotionHistory.loadFromFile(FILENAME, this);
+        emotionHistory = emotionHistory.loadFromFile(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        emotionHistory = emotionHistory.loadFromFile(FILENAME, this);
+        emotionHistory = emotionHistory.loadFromFile(this);
     }
 
     /* This method is the onClick method that each button uses. This method takes the appropriate
@@ -97,14 +96,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.historyButton:
-                emotionHistory.saveInFile(FILENAME, MainActivity.this, emotionHistory);
+                emotionHistory.saveInFile(MainActivity.this, emotionHistory);
                 Intent historyIntent = new Intent(this, EmotionHistoryActivity.class);
                 Toast.makeText(MainActivity.this, "History", Toast.LENGTH_LONG).show();
                 startActivity(historyIntent);
                 break;
 
             case R.id.emotionCountButton:
-                emotionHistory.saveInFile(FILENAME, MainActivity.this, emotionHistory);
+                emotionHistory.saveInFile(MainActivity.this, emotionHistory);
                 Intent countIntent = new Intent(this, EmotionCountActivity.class);
                 Toast.makeText(MainActivity.this, "Emotion Count", Toast.LENGTH_LONG).show();
                 startActivity(countIntent);
@@ -147,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
         Collections.sort((List<Emotion>) emotionHistory.getEmotionHistory(), new EmotionComparator());
-        emotionHistory.saveInFile(FILENAME, this, emotionHistory);
+        emotionHistory.saveInFile(this, emotionHistory);
     }
 
     /* This method is used when any on of the emotion buttons is hold to add an additional comment

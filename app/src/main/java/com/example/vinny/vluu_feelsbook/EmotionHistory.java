@@ -30,6 +30,7 @@ public class EmotionHistory implements Serializable {
 
 
     private ArrayList<Emotion> emotionHistory;
+    private static final String FILENAME = "filetest.sav";
 
     /* Constructor that creates a new custom array list of Emotion */
     public EmotionHistory() {
@@ -78,7 +79,7 @@ public class EmotionHistory implements Serializable {
     }
 
     /* Method used to load the EmotionHistory from the save file*/
-    public EmotionHistory loadFromFile(String FILENAME, Context context) {
+    public EmotionHistory loadFromFile(Context context) {
         try {
             FileInputStream fis = context.openFileInput(FILENAME);
             InputStreamReader isr = new InputStreamReader(fis);
@@ -100,7 +101,7 @@ public class EmotionHistory implements Serializable {
     }
 
     /* Method used to save the EmotionHistory into the save file*/
-    public void saveInFile(String FILENAME, Context context, EmotionHistory emotionHistory) {
+    public void saveInFile(Context context, EmotionHistory emotionHistory) {
         try {
             // FILE OUTPUTSTREAM makes a byte stream
             FileOutputStream fos = context.openFileOutput(FILENAME, 0);

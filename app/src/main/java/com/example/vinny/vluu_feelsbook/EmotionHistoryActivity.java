@@ -24,7 +24,6 @@ public class EmotionHistoryActivity extends AppCompatActivity {
      */
 
     private ListView emotionList;
-    private static final String FILENAME = "filetest.sav";
     private EmotionHistory emotionHistory;
     private ArrayAdapter<Emotion> adapter;
     private static final int EDIT_EMOTION = 0;
@@ -33,7 +32,7 @@ public class EmotionHistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emotion_history);
-        emotionHistory = new EmotionHistory().loadFromFile(FILENAME, this);
+        emotionHistory = new EmotionHistory().loadFromFile(this);
         emotionList = findViewById(R.id.emotionList);
 
         /* On a click on the list view that displays an emotion, start new EditEmotionActivity to
@@ -60,7 +59,7 @@ public class EmotionHistoryActivity extends AppCompatActivity {
                 emotionHistory.removeEmotion(emotion);
                 Toast.makeText(EmotionHistoryActivity.this, "Deleted Emotion", Toast.LENGTH_LONG).show();
                 adapter.notifyDataSetChanged();
-                emotionHistory.saveInFile(FILENAME, EmotionHistoryActivity.this, emotionHistory);
+                emotionHistory.saveInFile(EmotionHistoryActivity.this, emotionHistory);
                 return true;
             }
         });
@@ -70,7 +69,7 @@ public class EmotionHistoryActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        emotionHistory.loadFromFile(FILENAME, this);
+        emotionHistory.loadFromFile(this);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, (ArrayList<Emotion>) emotionHistory.getEmotionHistory());
         emotionList.setAdapter(adapter);
     }
@@ -87,7 +86,7 @@ public class EmotionHistoryActivity extends AppCompatActivity {
                 emotionHistory.setAnEmotion(newEmotion, emotionIndex);
                 Collections.sort((List<Emotion>) emotionHistory.getEmotionHistory(), new EmotionComparator());
                 adapter.notifyDataSetChanged();
-                emotionHistory.saveInFile(FILENAME, this, emotionHistory);
+                emotionHistory.saveInFile(this, emotionHistory);
             }
         }
     }

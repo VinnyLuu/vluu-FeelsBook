@@ -30,7 +30,7 @@ public class EmotionCountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_count_emotion);
 
         /* Set up the emotion history list and views to display the counts */
-        emotionHistory = new EmotionHistory().loadFromFile(FILENAME, this);
+        emotionHistory = new EmotionHistory().loadFromFile(this);
         joyCountView = findViewById(R.id.joyCountView);
         sadCountView = findViewById(R.id.sadCountView);
         angerCountView = findViewById(R.id.angerCountView);

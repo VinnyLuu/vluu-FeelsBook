@@ -29,7 +29,7 @@ public class EmotionHistory implements Serializable {
      */
 
 
-    public ArrayList<Emotion> emotionHistory;
+    private ArrayList<Emotion> emotionHistory;
 
     /* Constructor that creates a new custom array list of Emotion */
     public EmotionHistory() {

@@ -15,6 +15,7 @@ Using GSON was shown by our TA in the Thursday 5-8 ETLC 301 Lab: Shaiful Chowdhu
 
 To pass my emotions to different activities through intents, I made my Emotion class implement Serializable:
 https://developer.android.com/reference/java/io/Serializable
+Date Accessed: September 31, 2018
 
 To sort my emotion history by date, I created my own comparator class following this link:
 https://stackoverflow.com/a/2784576

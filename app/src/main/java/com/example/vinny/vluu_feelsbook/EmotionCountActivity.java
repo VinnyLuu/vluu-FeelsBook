@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class EmotionCountActivity extends AppCompatActivity {
+    /*
+     * EmotionCountActivity is the activity used to display the counts of each emotion. It sets
+     * up the views to display the counts and calls on EmotionHistory's count method to collect
+     * the counts of each emotion.
+     */
 
     private static final String FILENAME = "filetest.sav";
     private TextView joyCountView;
@@ -24,6 +29,7 @@ public class EmotionCountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_count_emotion);
 
+        /* Set up the emotion history list and views to display the counts */
         emotionHistory = new EmotionHistory().loadFromFile(FILENAME, this);
         joyCountView = findViewById(R.id.joyCountView);
         sadCountView = findViewById(R.id.sadCountView);
@@ -32,6 +38,7 @@ public class EmotionCountActivity extends AppCompatActivity {
         loveCountView = findViewById(R.id.loveCountView);
         fearCountView = findViewById(R.id.fearCountView);
 
+        /* Get counts of each emotion and set them to the correct view */
         angerCountView.setText(String.valueOf(emotionHistory.count(new Anger(new Date()))));
         joyCountView.setText(String.valueOf(emotionHistory.count(new Joy(new Date()))));
         sadCountView.setText(String.valueOf(emotionHistory.count(new Sadness(new Date()))));

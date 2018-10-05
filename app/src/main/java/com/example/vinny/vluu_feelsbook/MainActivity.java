@@ -6,12 +6,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
+    /*
+     * MainActivity is the starting Activity, displaying the buttons used to add the emotions
+     * into the emotionHistory. It also allows the users to navigate to the EmotionHistoryActivity
+     * by the Browse History button, the EmotionCountActivity by the Emotion Count button and
+     * the AddCommentActivity by holding on any one of the emotion buttons.To quick add an
+     * emotion, the user will click on the desired emotion button. To add a comment to the
+     * emotion, the user will hold onto the button and will then be taking to AddCommentActivity.
+     */
 
     private static final String FILENAME = "filetest.sav";
     private EmotionHistory emotionHistory;
@@ -23,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         emotionHistory = new EmotionHistory().loadFromFile(FILENAME, this);
         setContentView(R.layout.activity_main);
 
+        /* Setting up the buttons used to add the emotions and navigate to different activities */
         Button joyButton = findViewById(R.id.addJoy);
         Button angerButton = findViewById(R.id.addAnger);
         Button loveButton = findViewById(R.id.addLove);
@@ -32,16 +42,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button historyButton = findViewById(R.id.historyButton);
         Button emotionCountButton = findViewById(R.id.emotionCountButton);
 
+        /* Setting up of the listeners for each of the buttons in the activity and in the case for
+         * each of the emotion buttons, click and longclick listeners
+         */
         historyButton.setOnClickListener(this);
         emotionCountButton.setOnClickListener(this);
-
         joyButton.setOnClickListener(this);
         angerButton.setOnClickListener(this);
         loveButton.setOnClickListener(this);
         sadButton.setOnClickListener(this);
         fearButton.setOnClickListener(this);
         surpriseButton.setOnClickListener(this);
-
         joyButton.setOnLongClickListener(this);
         angerButton.setOnLongClickListener(this);
         loveButton.setOnLongClickListener(this);
@@ -50,13 +61,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         surpriseButton.setOnLongClickListener(this);
     }
 
+    /* This method is used to retrieve emotion with optional comment from the AddCommentActivity
+     * and insert it into the emotionHistory.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if (requestCode == SUBMIT_COMMENT) {
             if (resultCode == RESULT_OK) {
                 Emotion emotionAddedComment = AddCommentActivity.getEmotion(data);
                 emotionHistory.addEmotion(emotionAddedComment);
+                Toast.makeText(MainActivity.this, emotionAddedComment.getEmotionName() + " Added!", Toast.LENGTH_LONG).show();
                 Collections.sort((List<Emotion>) emotionHistory.getEmotionHistory(), new EmotionComparator());
                 emotionHistory.saveInFile(FILENAME, this, emotionHistory);
 
@@ -65,18 +79,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
         emotionHistory = emotionHistory.loadFromFile(FILENAME, this);
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         emotionHistory = emotionHistory.loadFromFile(FILENAME, this);
     }
 
-
+    /* This method is the onClick method that each button uses. This method takes the appropriate
+     * action when any one of the buttons is clicked.
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -134,6 +150,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         emotionHistory.saveInFile(FILENAME, this, emotionHistory);
     }
 
+    /* This method is used when any on of the emotion buttons is hold to add an additional comment
+     * to the emotion.
+     */
     @Override
     public boolean onLongClick(View v) {
         Emotion emotion;

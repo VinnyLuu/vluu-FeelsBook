@@ -19,49 +19,65 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class EmotionHistory implements Serializable{
-    // EmotionHistory is a class that is an Arraylist that holds Emotions.
+public class EmotionHistory implements Serializable {
+    /*
+     * EmotionHistory is a class that is used to instantiate a custom EmotionHistory object
+     * that is an Arraylist that holds instances of the custom class Emotion. It contains a
+     * getter for the emotion history, along with methods to obtain information about the
+     * emotions within the EmotionHistory, manipulate the emotions within the EmotionHistory,
+     * and both save and load the emotion from the file where it is saved.
+     */
+
 
     public ArrayList<Emotion> emotionHistory;
 
+    /* Constructor that creates a new custom array list of Emotion */
     public EmotionHistory() {
         emotionHistory = new ArrayList<Emotion>();
     }
 
+    /* Getter of EmotionHistory */
     public Collection<Emotion> getEmotionHistory() {
         return emotionHistory;
     }
 
-    public void addEmotion(Emotion emotion){
+    /* Method used to add an Emotion to the EmotionHistory */
+    public void addEmotion(Emotion emotion) {
         emotionHistory.add(emotion);
     }
 
-    public void removeEmotion(Emotion emotion){
+    /* Method used to remove an Emotion to the EmotionHistory */
+    public void removeEmotion(Emotion emotion) {
         emotionHistory.remove(emotion);
     }
 
+    /* Method used to get size of the EmotionHistory */
     public int size() {
         return emotionHistory.size();
     }
 
+    /* Method used to set an existing Emotion in the EmotionHistory to a new Emotion */
     public void setAnEmotion(Emotion newEmotion, int index) {
         emotionHistory.set(index, newEmotion);
     }
 
-    public int getIndex(Emotion emotion){
+    /* Method used to get the index of a specified Emotion from the EmotionHistory */
+    public int getIndex(Emotion emotion) {
         return emotionHistory.indexOf(emotion);
     }
 
+    /* Method used to count all instances of the specific emotion class from the EmotionHistory */
     public int count(Emotion emotion) {
         int count = 0;
         for (Emotion anEmotion : emotionHistory) {
-            if (anEmotion.getClass().equals(emotion.getClass())){
+            if (anEmotion.getClass().equals(emotion.getClass())) {
                 count++;
             }
         }
         return count;
     }
 
+    /* Method used to load the EmotionHistory from the save file*/
     public EmotionHistory loadFromFile(String FILENAME, Context context) {
         try {
             FileInputStream fis = context.openFileInput(FILENAME);
@@ -70,7 +86,8 @@ public class EmotionHistory implements Serializable{
             GsonBuilder builder = new GsonBuilder();
             builder.registerTypeAdapter(Emotion.class, new EmotionJsonAdapter());
             Gson gson = builder.create();
-            Type emotionHistoryType = new TypeToken<EmotionHistory>(){}.getType();
+            Type emotionHistoryType = new TypeToken<EmotionHistory>() {
+            }.getType();
             EmotionHistory emotionHistory = gson.fromJson(reader, emotionHistoryType);
             return emotionHistory;
 
@@ -82,6 +99,7 @@ public class EmotionHistory implements Serializable{
 
     }
 
+    /* Method used to save the EmotionHistory into the save file*/
     public void saveInFile(String FILENAME, Context context, EmotionHistory emotionHistory) {
         try {
             // FILE OUTPUTSTREAM makes a byte stream

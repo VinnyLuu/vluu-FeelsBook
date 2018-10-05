@@ -13,6 +13,12 @@ import java.lang.reflect.Type;
 import java.util.Date;
 
 public class EmotionJsonAdapter implements JsonSerializer<Emotion>, JsonDeserializer<Emotion> {
+    /*
+     * EmotionJsonAdapter is a custom class used to be able to save the abstracted Emotion
+     * class to the save file. Called on by saveInFile() and loadFromFile in the EmotionHistory
+     * class to save the arraylist of abstracted emotions.
+     */
+
     @Override
     public JsonElement serialize(Emotion src, Type typeofsrc, JsonSerializationContext context) {
         JsonObject object = new JsonObject();
@@ -26,7 +32,7 @@ public class EmotionJsonAdapter implements JsonSerializer<Emotion>, JsonDeserial
     }
 
     @Override
-    public Emotion deserialize(JsonElement jsonElement, Type typeofT, JsonDeserializationContext context){
+    public Emotion deserialize(JsonElement jsonElement, Type typeofT, JsonDeserializationContext context) {
         JsonObject object = jsonElement.getAsJsonObject();
         String type = object.get("Type").getAsString();
         JsonElement element = object.get("Properties");

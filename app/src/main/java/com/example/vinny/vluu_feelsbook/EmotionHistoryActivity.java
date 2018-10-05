@@ -15,6 +15,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class EmotionHistoryActivity extends AppCompatActivity {
+    /*
+     * EmotionHistoryActivity is the activity that will display the emotion history from the save
+     * file. It allows for the user to browse the emotions previously inputted and select an
+     * emotion to edit or delete. To edit an Emotion, the user will click on the desired emotion
+     * to edit on the list view. To delete an Emotion, the user will hold on the desired
+     * emotion to be deleted on the list view.
+     */
 
     private ListView emotionList;
     private static final String FILENAME = "filetest.sav";
@@ -29,6 +36,9 @@ public class EmotionHistoryActivity extends AppCompatActivity {
         emotionHistory = new EmotionHistory().loadFromFile(FILENAME, this);
         emotionList = findViewById(R.id.emotionList);
 
+        /* On a click on the list view that displays an emotion, start new EditEmotionActivity to
+         * edit the emotion.
+         */
         emotionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -40,6 +50,9 @@ public class EmotionHistoryActivity extends AppCompatActivity {
             }
         });
 
+        /* On a long click on the list view that displays an emotion, remove the emotion from the
+         * emotionHistory.
+         */
         emotionList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -55,13 +68,16 @@ public class EmotionHistoryActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
         emotionHistory.loadFromFile(FILENAME, this);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1 , (ArrayList<Emotion>) emotionHistory.getEmotionHistory());
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, (ArrayList<Emotion>) emotionHistory.getEmotionHistory());
         emotionList.setAdapter(adapter);
     }
 
+    /* On result after editing an emotion, this method will extract the newly edited emotion and
+     * set the old emotion to the new edited emotion.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == EDIT_EMOTION) {
